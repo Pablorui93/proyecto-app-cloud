@@ -3,7 +3,7 @@
 const uploadFileToS3 = async (file, userId) => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     
-    const BUCKET_NAME = 'TU-NOMBRE-DEL-BUCKET-S3-AQUI'; 
+    const BUCKET_NAME = 'commlink-chat-assets-ruival'; 
 
     const getUrlResponse = await fetch(
         `${API_BASE_URL}/upload-url?fileName=${file.name}&fileType=${file.type}`,
