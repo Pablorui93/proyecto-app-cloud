@@ -3,7 +3,9 @@
 function App() {
 
   return (
-    console.log("hola")
+    <>
+      <h1>hola</h1>
+    </>
   )
 }
 
