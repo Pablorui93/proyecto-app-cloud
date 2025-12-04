@@ -69,54 +69,54 @@ El backend es completamente serverless, sin servidores ni contenedores.
       Método	Endpoint	Lambda
       POST	/messages	chat_post_message
       GET	/messages/{channelId}	chat_get_messages
-  ✔️ 3.2. Lambda: Generar URL firmada (S3)
+    ✔️ 3.2. Lambda: Generar URL firmada (S3)
 
-Código implementado:
+        Código implementado:
 
-upload_url = s3_client.generate_presigned_url(
-    'put_object', 
-    Params={
-        'Bucket': BUCKET_NAME,
-        'Key': object_key,
-        'ContentType': content_type
-    },
-    ExpiresIn=300 
-)
+        upload_url = s3_client.generate_presigned_url(
+            'put_object', 
+            Params={
+                'Bucket': BUCKET_NAME,
+                'Key': object_key,
+                'ContentType': content_type
+            },
+            ExpiresIn=300 
+        )
 
 
-Devuelve:
+        Devuelve:
 
-{
-  "uploadURL": "...signed url...",
-  "fileKey": "uploads/nombre.png"
-}
+        {
+          "uploadURL": "...signed url...",
+          "fileKey": "uploads/nombre.png"
+        }
 
-✔️ 3.3. Tabla DynamoDB
+        ✔️ 3.3. Tabla DynamoDB
 
-  Tabla: Users
-    userId (PK)
-    profilePhotoURL
+          Tabla: Users
+            userId (PK)
+            profilePhotoURL
 
-  Tabla: Messages
-    channelId (PK)
-    timestamp (SK)
-    userId
-    content
+          Tabla: Messages
+            channelId (PK)
+            timestamp (SK)
+            userId
+            content
 
-✔️ 3.4. CORS S3 Fix (IMPORTANTE)
+          ✔️ 3.4. CORS S3 Fix (IMPORTANTE)
 
-  Configuración aplicada:
+            Configuración aplicada:
 
-  {
-    "CORSRules": [
-      {
-        "AllowedHeaders": ["*"],
-        "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
-        "AllowedOrigins": ["*"],
-        "ExposeHeaders": []
-      }
-    ]
-  }
+            {
+              "CORSRules": [
+                {
+                  "AllowedHeaders": ["*"],
+                  "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
+                  "AllowedOrigins": ["*"],
+                  "ExposeHeaders": []
+                }
+              ]
+            }
 
 🎨 4. Frontend (React + Vite)
   ✔️ 4.1. Tecnologías usadas
