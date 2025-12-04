@@ -1,4 +1,6 @@
 .message-list {
+    width: 2000px;
+    height: 350px;
     overflow: auto;
     padding: 18px;
     display: flex;
@@ -7,7 +9,6 @@
     flex: 1 1 auto;
     scroll-behavior: smooth;
     min-height: 0;
-    overflow: auto;
 }
 
 .message-list p {

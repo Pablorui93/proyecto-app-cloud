@@ -1,7 +1,6 @@
 export const uploadFileToS3 = async (file, userId) => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    // 1) Pedir la URL firmada a tu Lambda
     const getUrlResponse = await fetch(
         `${API_BASE_URL}/upload-url?fileName=${encodeURIComponent(file.name)}&fileType=${encodeURIComponent(file.type)}`,
         { method: 'GET' }
@@ -17,7 +16,6 @@ export const uploadFileToS3 = async (file, userId) => {
     const uploadURL = data.uploadURL; 
     if (!uploadURL) throw new Error("Lambda no devolvió la URL firmada");
 
-    // 2) Subir archivo directamente a S3
     const s3Upload = await fetch(uploadURL, {
         method: 'PUT',
         headers: { "content-type": file.type },
@@ -28,10 +26,8 @@ export const uploadFileToS3 = async (file, userId) => {
         throw new Error("Error subiendo el archivo a S3");
     }
 
-    // 3) Crear la URL pública final (tu bucket debe ser público o tener CloudFront)
     const publicFileURL = uploadURL.split("?")[0];
 
-    // 4) Guardar la URL pública en DynamoDB
     const updateDb = await fetch(`${API_BASE_URL}/users/profile`, {
         method: "POST",
         headers: { "content-type": "application/json" },
