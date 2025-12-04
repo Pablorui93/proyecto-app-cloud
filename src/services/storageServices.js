@@ -1,39 +1,49 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const BUCKET_NAME = 'commlink-chat-assets-ruival';
-
 export const uploadFileToS3 = async (file, userId) => {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+    // 1) Pedir la URL firmada a tu Lambda
     const getUrlResponse = await fetch(
-        `${API_BASE_URL}/upload-url?fileName=${file.name}&fileType=${file.type}`,
+        `${API_BASE_URL}/upload-url?fileName=${encodeURIComponent(file.name)}&fileType=${encodeURIComponent(file.type)}`,
         { method: 'GET' }
     );
 
-    if (!getUrlResponse.ok) throw new Error("Fallo al obtener la URL firmada.");
+    if (!getUrlResponse.ok) {
+        const err = await getUrlResponse.text();
+        throw new Error("Error obteniendo URL firmada: " + err);
+    }
 
-    const { uploadURL, fileKey } = await getUrlResponse.json();
-    const publicFileURL = `https://${BUCKET_NAME}.s3.amazonaws.com/${fileKey}`;
+    const data = await getUrlResponse.json();
 
-    console.log("Subiendo directamente a AWS S3...");
-    const s3UploadResponse = await fetch(uploadURL, {
+    const uploadURL = data.url;   
+    if (!uploadURL) throw new Error("Lambda no devolvió la URL firmada");
+
+    // 2) Subir archivo directamente a S3
+    const s3Upload = await fetch(uploadURL, {
         method: 'PUT',
-        headers: { 'Content-Type': file.type },
-        body: file,
+        headers: { "Content-Type": file.type },
+        body: file
     });
 
-    if (!s3UploadResponse.ok) throw new Error("Fallo la subida a S3.");
-    console.log("Subida a S3 exitosa.");
+    if (!s3Upload.ok) {
+        throw new Error("Error subiendo el archivo a S3");
+    }
 
-    const updateDbResponse = await fetch(`${API_BASE_URL}/users/profile`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    // 3) Crear la URL pública final (tu bucket debe ser público o tener CloudFront)
+    const publicFileURL = uploadURL.split("?")[0];
+
+    // 4) Guardar la URL pública en DynamoDB
+    const updateDb = await fetch(`${API_BASE_URL}/users/profile`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             userId: userId,
             profilePhotoURL: publicFileURL
         })
     });
 
-    if (updateDbResponse.ok) {
-        return publicFileURL;
+    if (!updateDb.ok) {
+        throw new Error("Error actualizando perfil del usuario");
     }
-    throw new Error("Fallo al actualizar el perfil en DynamoDB.");
+
+    return publicFileURL;
 };
