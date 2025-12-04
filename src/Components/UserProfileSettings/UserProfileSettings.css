@@ -1,0 +1,49 @@
+.profile-settings {
+    padding: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.profile-preview {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 0 0 56px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: var(--glass);
+}
+
+.profile-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.file-upload {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload label {
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.12), rgba(110, 231, 183, 0.06));
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.status-message {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+}

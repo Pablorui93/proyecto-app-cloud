@@ -1,5 +1,6 @@
 
 import React from 'react';
+import './ChannelList.css';
 
 const MOCK_CHANNELS = [
     { id: 'general', name: '# General' },

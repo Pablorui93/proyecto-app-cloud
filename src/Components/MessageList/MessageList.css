@@ -1,0 +1,15 @@
+.message-list {
+    overflow: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 auto;
+    scroll-behavior: smooth;
+    min-height: 0;
+}
+
+.message-list p {
+    color: var(--muted);
+    margin: 0;
+}

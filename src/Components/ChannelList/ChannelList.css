@@ -1,0 +1,43 @@
+.channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.channel-list h3 {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.channel-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.channel-list li {
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 600;
+    background: transparent;
+    transition: all .14s ease;
+}
+
+.channel-list li:hover {
+    transform: translateY(-2px);
+    background: var(--glass);
+}
+
+.channel-list li.active {
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.10), rgba(110, 231, 183, 0.05));
+    color: var(--accent);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}

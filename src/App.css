@@ -1,0 +1,95 @@
+:root {
+    --bg: #0f1724;
+    --panel: #0b1220;
+    --muted: #98a0b3;
+    --accent: #6ee7b7;
+    --accent-2: #60a5fa;
+    --text: #e6eef8;
+    --glass: rgba(255, 255, 255, 0.03);
+    --radius: 12px;
+    --shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Base */
+* {
+    box-sizing: border-box
+}
+
+html,
+body,
+#root {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg), #061023);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+}
+
+/* Main layout */
+.app-container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    height: 100vh;
+    padding: 18px;
+    align-items: stretch;
+}
+
+.sidebar {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+}
+
+.main-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    border-radius: var(--radius);
+    padding: 12px;
+    box-shadow: var(--shadow);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 18px
+}
+
+@media (max-width:900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        padding: 10px
+    }
+
+    .sidebar {
+        order: 2
+    }
+
+    .main-chat {
+        order: 1
+    }
+}

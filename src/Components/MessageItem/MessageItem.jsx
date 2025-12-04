@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchUserProfileWithCache } from '../../services/useServices';
+import './MessageItem.css';
 
 function MessageItem({ message }) {
     const [authorProfile, setAuthorProfile] = useState({
@@ -24,7 +25,7 @@ function MessageItem({ message }) {
     return (
         <div className="message">
             <img
-                src={authorProfile.profilePhotoURL || '/default-avatar.png'}
+                src={authorProfile.profilePhotoURL || '/question-mark-1019820_1280.webp'}
                 alt={authorProfile.username}
                 className="avatar"
             />

@@ -1,0 +1,67 @@
+.message {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    max-width: 75%;
+}
+
+.message .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex: 0 0 44px;
+    box-shadow: 0 6px 14px rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.message-content {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--text);
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.username-time {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.username {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.timestamp {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.message-content p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.35;
+    white-space: pre-wrap;
+    color: var(--text);
+}
+
+.msg-img {
+    max-width: 360px;
+    border-radius: 10px;
+    margin-top: 6px;
+    object-fit: cover;
+    display: block;
+}
+
+.message.me .message-content {
+    margin-left: auto;
+    background: linear-gradient(180deg, rgba(40, 48, 60, 1), rgba(28, 34, 44, 1));
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}

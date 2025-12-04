@@ -14,7 +14,7 @@ export const uploadFileToS3 = async (file, userId) => {
 
     const data = await getUrlResponse.json();
 
-    const uploadURL = data.url;   
+    const uploadURL = data.uploadURL; 
     if (!uploadURL) throw new Error("Lambda no devolvió la URL firmada");
 
     // 2) Subir archivo directamente a S3
