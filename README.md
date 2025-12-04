@@ -15,39 +15,60 @@ Chat funcional con subida de fotos, perfiles, manejo de canales y mensajes, util
       Consumir servicios serverless mediante API Gateway + Lambdas
 
 
-
+🏛️ 2. Arquitectura General
 
 El frontend está desarrollado en React (Vite) y deployeado en Vercel.
 El backend es completamente serverless, sin servidores ni contenedores.
 
-🏛️ 2. Arquitectura General
-┌───────────────┐       GET/POST         ┌───────────────────────┐
-│   React (Vite) │  ───────────────────▶  │  API Gateway (REST)   │
-└───────┬────────┘                        └──────────┬────────────┘
-        │                                          │
-        │                                          ▼
-        │                                   ┌────────────┐
-        │                                   │  Lambdas   │
-        │                                   └─────┬──────┘
-        │                                         │
-   PUT file                                       │
-        │                                         ▼
-        └────────────▶  S3 (Signed URL)    DynamoDB (Users, Messages)
+    React (Vite)
+      |
+      |  GET / POST (interacciones del frontend)
+      v
+    API Gateway (REST)
+      |
+      |  Invocación de endpoints
+      v
+    Lambda Functions
+      |
+      |  Lectura / escritura de datos
+      v
+    DynamoDB (Users, Messages)
+
+
+    Subida de archivos (imágenes del chat):
+
+    React (Vite)
+      |
+      |  Solicita una URL firmada (GET /upload-url)
+      v
+    API Gateway
+      |
+      v
+    Lambda (get_signed_url)
+      |
+      |  Devuelve Signed URL
+      v
+    React (Vite)
+      |
+      |  PUT del archivo directamente a S3 usando la URL firmada
+      v
+    Amazon S3
+
 
 🧬 3. Backend AWS — Detalles
   ✔️ 3.1. Endpoints creados
-    📌 Upload de archivos
-    Método	Endpoint	Lambda
-    GET	/upload-url	chat_get_signed_url
-    📌 Usuarios
-    Método	Endpoint	Lambda
-    GET	/users	GetUserById
-    GET	/users/{userId}	GetUserById
-    POST	/profile	chat_update_profile
-    📌 Mensajes
-    Método	Endpoint	Lambda
-    POST	/messages	chat_post_message
-    GET	/messages/{channelId}	chat_get_messages
+      📌 Upload de archivos
+      Método	Endpoint	Lambda
+      GET	/upload-url	chat_get_signed_url
+      📌 Usuarios
+      Método	Endpoint	Lambda
+      GET	/users	GetUserById
+      GET	/users/{userId}	GetUserById
+      POST	/profile	chat_update_profile
+      📌 Mensajes
+      Método	Endpoint	Lambda
+      POST	/messages	chat_post_message
+      GET	/messages/{channelId}	chat_get_messages
   ✔️ 3.2. Lambda: Generar URL firmada (S3)
 
 Código implementado:
@@ -110,26 +131,25 @@ Devuelve:
 
 ✔️ 4.2. Estructura del proyecto
   src/
-  ├── App.jsx
-  ├── App.css
-  ├── hooks/
-  │    └── useServices.js
-  ├── Components/
-  │    ├── ChannelList/
-  │    │      ├── ChannelList.jsx
-  │    │      ├── ChannelList.css
-  │    ├── MessageList/
-  │    │      ├── MessageList.jsx
-  │    │      ├── MessageList.css
-  │    ├── MessageItem/
-  │    │      ├── MessageItem.jsx
-  │    │      ├── MessageItem.css
-  │    ├── MessageInput/
-  │    │      ├── MessageInput.jsx
-  │    │      ├── MessageInput.css
-  │    └── UserProfileSettings/
-  │           ├── UserProfileSettings.jsx
-  │           ├── UserProfileSettings.css
+  ├App.jsx
+  ├App.css
+  ├hooks/ useServices.js
+  ├Components/
+  │--ChannelList/
+  │----ChannelList.jsx
+  │----ChannelList.css
+  │--MessageList/
+  │----MessageList.jsx
+  │----MessageList.css
+  │--MessageItem/
+  │----MessageItem.jsx
+  │----MessageItem.css
+  │--MessageInput/
+  │----MessageInput.jsx
+  │----MessageInput.css
+  │--UserProfileSettings/
+  │----UserProfileSettings.jsx
+  │----serProfileSettings.css
 
 📸 5. Subida de Fotos
   ✔️ Flujo completo implementado
