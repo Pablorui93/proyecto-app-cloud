@@ -7,6 +7,7 @@
     flex: 1 1 auto;
     scroll-behavior: smooth;
     min-height: 0;
+    overflow: auto;
 }
 
 .message-list p {
