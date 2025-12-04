@@ -131,25 +131,25 @@ El backend es completamente serverless, sin servidores ni contenedores.
 
 ✔️ 4.2. Estructura del proyecto
   src/
-  ├App.jsx
-  ├App.css
-  ├hooks/ useServices.js
-  ├Components/
-  │--ChannelList/
-  │----ChannelList.jsx
-  │----ChannelList.css
-  │--MessageList/
-  │----MessageList.jsx
-  │----MessageList.css
-  │--MessageItem/
-  │----MessageItem.jsx
-  │----MessageItem.css
-  │--MessageInput/
-  │----MessageInput.jsx
-  │----MessageInput.css
-  │--UserProfileSettings/
-  │----UserProfileSettings.jsx
-  │----serProfileSettings.css
+  App.jsx
+  App.css
+  hooks/ useServices.js
+  Components/
+  --ChannelList/
+  ----ChannelList.jsx
+  ----ChannelList.css
+  --MessageList/
+  ----MessageList.jsx
+  ----MessageList.css
+  --MessageItem/
+  ----MessageItem.jsx
+  ----MessageItem.css
+  --MessageInput/
+  ----MessageInput.jsx
+  ----MessageInput.css
+  --UserProfileSettings/
+  ----UserProfileSettings.jsx
+  ----serProfileSettings.css
 
 📸 5. Subida de Fotos
   ✔️ Flujo completo implementado
