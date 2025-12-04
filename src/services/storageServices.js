@@ -34,7 +34,7 @@ export const uploadFileToS3 = async (file, userId) => {
     // 4) Guardar la URL pública en DynamoDB
     const updateDb = await fetch(`${API_BASE_URL}/users/profile`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify({
             userId: userId,
             profilePhotoURL: publicFileURL
