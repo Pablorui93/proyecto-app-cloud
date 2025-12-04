@@ -17,7 +17,7 @@ export const fetchUserProfileWithCache = async (userId) => {
             profileCache[userId] = profileData;
             return profileData;
         } else {
-            return { username: userId, profilePhotoURL: "/default-avatar.png" };
+            return { username: userId, profilePhotoURL: "./question-mark-1019820_1280.webp" };
         }
     } catch (error) {
         console.error("Error de red al obtener perfil:", error);
