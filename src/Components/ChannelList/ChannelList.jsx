@@ -6,7 +6,7 @@ const MOCK_CHANNELS = [
     { id: 'general', name: '# General' },
     { id: 'soporte', name: '# Soporte Técnico' },
     { id: 'random', name: '# Random' },
-    { id: 'privado-pablo', name: '@ Juan Perez' },
+    { id: 'privado-pablo', name: '@ Pablo' },
 ];
 
 function ChannelList({ currentChannelId, onSelectChannel }) {
