@@ -1,5 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const BUCKET_NAME = 'TU-NOMBRE-DEL-BUCKET-S3-AQUI';
+const BUCKET_NAME = 'commlink-chat-assets-ruival';
 
 export const uploadFileToS3 = async (file, userId) => {
 
