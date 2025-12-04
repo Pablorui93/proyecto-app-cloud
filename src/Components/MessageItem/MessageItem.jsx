@@ -25,7 +25,7 @@ function MessageItem({ message }) {
     return (
         <div className="message">
             <img
-                src={authorProfile.profilePhotoURL || '/question-mark-1019820_1280.webp'}
+                src={authorProfile.profilePhotoURL }
                 alt={authorProfile.username}
                 className="avatar"
             />
