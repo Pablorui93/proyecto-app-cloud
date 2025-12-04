@@ -20,7 +20,7 @@ export const uploadFileToS3 = async (file, userId) => {
     // 2) Subir archivo directamente a S3
     const s3Upload = await fetch(uploadURL, {
         method: 'PUT',
-        headers: { "Content-Type": file.type },
+        headers: { "content-type": file.type },
         body: file
     });
 
